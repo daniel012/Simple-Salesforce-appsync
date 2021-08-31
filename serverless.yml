@@ -1,0 +1,71 @@
+service: sfdc-example
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  environment:
+    SDFC_USER: user
+    SDFC_PASSWORD: password
+    SFDC_TOKEN: token
+    SFDC_URL: url
+plugins:
+   - serverless-appsync-plugin
+
+functions:
+  sfdcLambda:
+    handler: handler.sfdcLambda
+  
+custom:
+  accountId: #YOUR account Id
+  appSync:
+    name: graphql.layer
+    authenticationType: API_KEY
+    userPoolConfig:
+      awsRegion:  us-east-1
+      defaultAction: ALLOW
+    mappingTemplates:
+      - dataSource: sfdcSource
+        type: Query 
+        field: simpleQuery
+        request: "request-mapping-template.vtl"
+        response: "response-mapping-template.vtl"
+ 
+    schema:
+    serviceRole: "graphql-test"
+    dataSources:
+      - type: AWS_LAMBDA
+        name: sfdcSource
+        description: 'Get filtered students service'
+        config:
+          lambdaFunctionArn: { Fn::GetAtt: [SfdcLambdaLambdaFunction, Arn] }
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+      
+resources:
+  Resources:
+    AppSyncLambdaServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "Lambda-${self:custom.appSync.serviceRole}"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        ManagedPolicyArns: 
+          - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        Policies:
+          - PolicyName: "Lambda-${self:custom.appSync.serviceRole}-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: "Allow"
+                  Action:
+                    - "lambda:invokeFunction"
+                  Resource:
+                    - "arn:aws:lambda:us-east-1:{#YOUR account Id}:function:${self:service}-dev-sfdcLambda"
+                    

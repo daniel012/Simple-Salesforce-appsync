@@ -1,0 +1,9 @@
+type Resp {
+        user: String,
+        account: String
+    }
+
+
+type Query {
+    simpleQuery(param: String): Resp
+    }
