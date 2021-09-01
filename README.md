@@ -84,7 +84,17 @@ Please install [serverless](https://www.serverless.com/framework/docs/getting-st
    ```sh
    serverless config credentials --provider aws --key YOUR_AWS_KEY --secret YOUR_AWS_SECRET -o
    ```
-5. Modify serverless.yml to add you AWS account Id 
+5. Add your Salesforce credentials in the serverless.yml
+   ```yml
+    SDFC_USER: user
+    SDFC_PASSWORD: password
+    SFDC_TOKEN: token
+    SFDC_URL: url
+   ```
+7. Modify serverless.yml to add you AWS account Id 
+   ```yml
+      accountId: #YOUR account Id
+   ```
 
 
 
