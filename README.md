@@ -70,19 +70,19 @@ Please install [serverless](https://www.serverless.com/framework/docs/getting-st
 
 1. Clone the repo
    ```sh
-   git repo clone daniel012/Simple-sfdc-appsync
+   $git repo clone daniel012/Simple-sfdc-appsync
    ```
 2. verify that you have serverless install with 
    ```sh
-   server --version
+   $serverless --version
    ```
 3. Install NPM packages
    ```sh
-   npm install
+   $npm install
    ```
 4. enter your serverless credentials  
    ```sh
-   serverless config credentials --provider aws --key YOUR_AWS_KEY --secret YOUR_AWS_SECRET -o
+   $serverless config credentials --provider aws --key YOUR_AWS_KEY --secret YOUR_AWS_SECRET -o
    ```
 5. Add your Salesforce credentials in the serverless.yml
    ```yml
