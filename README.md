@@ -34,7 +34,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -89,7 +88,12 @@ Please install [serverless](https://www.serverless.com/framework/docs/getting-st
 
 
 
-
+<!-- Usage -->
+## Usage
+You can deploy your GraphQL layer using the following command 
+```sh
+serverless deploy
+```
 
 <!-- LICENSE -->
 ## License
