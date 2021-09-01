@@ -6,7 +6,7 @@
 <br />
 <p align="center">
  
-  <h3 align="center">Simple-sfdc-appsync</h3>
+  <h3 align="center">Simple-Salesforce-appsync</h3>
 
   <p align="center">
     Create a GraphQL layer to expose Salesforce infomation using APPSync 
