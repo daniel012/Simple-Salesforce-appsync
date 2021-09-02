@@ -1,9 +1,9 @@
-type Resp {
+type SimpleResponse {
         user: String,
         account: String
     }
 
 
 type Query {
-    simpleQuery(parameter: String): Resp
+    simpleQuery(parameter: String): SimpleResponse
     }
