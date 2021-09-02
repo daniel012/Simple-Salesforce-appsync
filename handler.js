@@ -6,7 +6,10 @@ module.exports.sfdcLambda = async (event, context) => {
   
   try {
     if (!conn) conn = await setupJsForcePool();
-    const { selectionSetList } = event;
+    const { 
+      arguments: { parameter },
+      selectionSetList } = event;
+    console.log('hello I am a parameter: ', parameter);
     const response = {};
       if(selectionSetList.includes('account')){
         // Do some account query
@@ -24,6 +27,7 @@ module.exports.sfdcLambda = async (event, context) => {
       }
     return response;
   } catch (e) {
+    console.log('this is the error', e)
     context.fail('error message');
     return null;
   }

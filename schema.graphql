@@ -5,5 +5,5 @@ type Resp {
 
 
 type Query {
-    simpleQuery(param: String): Resp
+    simpleQuery(parameter: String): Resp
     }
